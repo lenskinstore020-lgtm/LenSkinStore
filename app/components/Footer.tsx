@@ -6,7 +6,7 @@ const WHATSAPP_URL = "https://wa.me/380000000000"; // той самий номе
 
 export const Footer = () => {
   return (
-    <footer className="bg-[#000000] text-white mt-12">
+    <footer className="bg-[#2C2C2C] text-white mt-12">
       <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col items-center gap-8">
         {/* Назва бренду */}
         <div className="text-center">

@@ -81,51 +81,31 @@ export default async function Home() {
       <HeroSection />
       <CategoryCircles types={types} products={products} />
       <section>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: "2.5rem",
-            margin: "55px",
-          }}
-        >
+        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-10 px-4 sm:px-6 md:px-10 lg:px-14 py-8 sm:py-10 md:py-12 lg:py-14 max-w-7xl mx-auto">
           {products.map((item) => {
             const images = getProductImages(item);
             return (
               <div
                 key={item.docId}
-                style={{
-                  border: "1px solid #ccc",
-                  borderRadius: "8px",
-                  background: "#222222",
-                  padding: "1rem",
-                }}
+                className="border border-[#ccc] rounded-lg bg-[#222222] p-3 sm:p-4 flex flex-col"
               >
                 <Link
                   href={`/product/${item.docId}`}
+                  className="flex flex-col flex-1"
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   {images[0] && (
                     <img
                       src={images[0]}
                       alt={item.Name || ""}
-                      style={{
-                        width: "100%",
-                        height: "300px",
-                        objectFit: "cover",
-                        borderRadius: "6px",
-                        marginBottom: "0.5rem",
-                      }}
+                      className="w-full aspect-square sm:aspect-[3/4] object-cover rounded-md mb-2"
                     />
                   )}
-                  <h3 className="text-white robotoCondensedFont text-[18px] text-center">
+                  <h3 className="text-white robotoCondensedFont text-[14px] sm:text-[15px] md:text-[16px] lg:text-[18px] text-center leading-tight line-clamp-2 min-h-[2.6em]">
                     {item.Name}
                   </h3>
                   {item.Cost && item.Cost.length > 0 && (
-                    <div
-                      className="text-[#F0BB78] text-[17px] text-center"
-                      style={{ margin: "0.5rem 0" }}
-                    >
+                    <div className="text-[#F0BB78] text-[13px] sm:text-[14px] md:text-[15px] lg:text-[17px] text-center my-2">
                       {item.Cost.map((variant, index) =>
                         Object.entries(variant).map(([size, price]) => (
                           <div key={`${index}-${size}`}>

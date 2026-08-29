@@ -4,7 +4,7 @@ export const HeroSection = () => {
       className="hero min-h-[80vh]"
       style={{
         backgroundImage:
-          "url(https://res.cloudinary.com/z88a2was/image/upload/v1787824317/chris-jarvis-0Pf7fKRtDPI-unsplash.jpg)",
+          "url(https://res.cloudinary.com/z88a2was/image/upload/v1787991708/photo_2026-08-29_10-21-05.jpg)",
       }}
     >
       <div className="hero-overlay"></div>

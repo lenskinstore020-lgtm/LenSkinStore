@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const NavMenu = () => {
   return (
-    <div className=" flex justify-between place-content-center bg-[#000000] shadow-sm w-full min-h-16 sm:min-h-20 md:min-h-28 px-2 sm:px-4 md:px-6 flex-wrap">
+    <div className=" flex justify-between place-content-center bg-[#2C2C2C] shadow-sm w-full min-h-16 sm:min-h-20 md:min-h-28 px-2 sm:px-4 md:px-6 flex-wrap">
       <div className="">
         <div className="drawer w-auto">
           <input id="my-drawer-1" type="checkbox" className="drawer-toggle" />
@@ -36,7 +36,7 @@ export const NavMenu = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu bg-[#000000] text-lg sm:text-xl md:text-2xl text-white min-h-full w-64 sm:w-72 md:w-80 p-4 gap-2">
+            <ul className="menu bg-[#2C2C2C] text-lg sm:text-xl md:text-2xl text-white min-h-full w-64 sm:w-72 md:w-80 p-4 gap-2">
               <li>
                 <label htmlFor="my-drawer-1">
                   <Link
