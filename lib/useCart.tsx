@@ -7,18 +7,41 @@ export interface CartItem {
   quantity: number;
 }
 
+function readCart(): CartItem[] {
+  try {
+    const raw = localStorage.getItem("cart");
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeCart(items: CartItem[]) {
+  localStorage.setItem("cart", JSON.stringify(items));
+  window.dispatchEvent(
+    new CustomEvent("local-storage-list-change", { detail: { key: "cart" } }),
+  );
+}
+
 export function useCart() {
   const [items, setItems] = useState<CartItem[]>([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem("cart");
-      setItems(raw ? JSON.parse(raw) : []);
-    } catch {
-      setItems([]);
-    }
+    setItems(readCart());
     setLoaded(true);
+
+    const handleChange = (e: Event) => {
+      const customEvent = e as CustomEvent<{ key: string }>;
+      if (customEvent.detail?.key === "cart") {
+        setItems(readCart());
+      }
+    };
+
+    window.addEventListener("local-storage-list-change", handleChange);
+    return () => {
+      window.removeEventListener("local-storage-list-change", handleChange);
+    };
   }, []);
 
   const addToCart = useCallback((docId: string) => {
@@ -29,7 +52,7 @@ export function useCart() {
             i.docId === docId ? { ...i, quantity: i.quantity + 1 } : i,
           )
         : [...prev, { docId, quantity: 1 }];
-      localStorage.setItem("cart", JSON.stringify(next));
+      writeCart(next);
       return next;
     });
   }, []);
@@ -37,7 +60,7 @@ export function useCart() {
   const removeFromCart = useCallback((docId: string) => {
     setItems((prev) => {
       const next = prev.filter((i) => i.docId !== docId);
-      localStorage.setItem("cart", JSON.stringify(next));
+      writeCart(next);
       return next;
     });
   }, []);
@@ -48,7 +71,7 @@ export function useCart() {
         quantity <= 0
           ? prev.filter((i) => i.docId !== docId)
           : prev.map((i) => (i.docId === docId ? { ...i, quantity } : i));
-      localStorage.setItem("cart", JSON.stringify(next));
+      writeCart(next);
       return next;
     });
   }, []);

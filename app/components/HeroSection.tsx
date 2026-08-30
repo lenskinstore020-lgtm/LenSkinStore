@@ -9,16 +9,21 @@ export const HeroSection = () => {
     >
       <div className="hero-overlay"></div>
       <div className="hero-content text-neutral-content text-center">
-        <div className="max-w-md">
-          <h1 className="mb-5 yesteryearFont text-2xl sm:text-4xl md:text-8xl leading-tight text-white truncate">
+        <div className="max-w-3xl">
+          <h1 className="mb-5 yesteryearFont text-2xl sm:text-4xl md:text-9xl text-white truncate">
             Lén skin store
           </h1>
-          <p className="mb-5">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+          <p className="mb-5 yesteryearFont text-2xl sm:text-2xl md:text-3xl text-white truncate">
+            Where professional skincare meets personalized care. <br />
           </p>
-          <button className="btn btn-primary">Get Started</button>
+
+          <p className="mb-5 text-[20px]">
+            Curated by a licensed skincare professional, LÉN Skin Store brings
+            together professional-grade skincare selected with your skin’s needs
+            in mind. Discover trusted products designed to nourish, protect,
+            restore and enhance your skin — because beautiful skin starts with
+            the right care.
+          </p>
         </div>
       </div>
     </div>

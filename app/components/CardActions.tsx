@@ -31,7 +31,7 @@ export default function CardActions({ docId }: { docId: string }) {
           padding: "0.4rem 0.7rem",
           borderRadius: "6px",
           border: "1px solid #ccc",
-          background: isFavorite ? "#ffe0e0" : "transparent",
+          background: "#000000",
           cursor: "pointer",
           display: "flex",
           alignItems: "center",
@@ -43,8 +43,8 @@ export default function CardActions({ docId }: { docId: string }) {
           width="18"
           height="18"
           xmlns="http://www.w3.org/2000/svg"
-          fill={isFavorite ? "#F44336" : "none"}
-          stroke={isFavorite ? "#F44336" : "currentColor"}
+          fill={isFavorite ? "#F44336" : "white"}
+          stroke="white"
           strokeWidth="60"
         >
           <path d="M725.333333 192c-89.6 0-168.533333 44.8-213.333333 115.2C467.2 236.8 388.266667 192 298.666667 192 157.866667 192 42.666667 307.2 42.666667 448c0 253.866667 469.333333 512 469.333333 512s469.333333-256 469.333333-512c0-140.8-115.2-256-256-256z" />

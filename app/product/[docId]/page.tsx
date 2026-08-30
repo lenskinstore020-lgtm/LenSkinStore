@@ -47,88 +47,90 @@ export default async function ProductPage({ params }: ProductPageProps) {
       : [];
 
   return (
-    <div style={{ padding: "2rem", maxWidth: "700px", margin: "0 auto" }}>
-      <Link href="/">← На головну</Link>
+    <>
+      <div style={{ padding: "2rem", maxWidth: "700px", margin: "0 auto" }}>
+        <Link href="/">← На головну</Link>
 
-      <h1 style={{ marginTop: "1rem" }}>{product.Name}</h1>
+        <h1 style={{ marginTop: "1rem" }}>{product.Name}</h1>
 
-      {images.length > 0 && (
-        <div
-          style={{
-            display: "flex",
-            gap: "0.5rem",
-            flexWrap: "wrap",
-            margin: "1rem 0",
-          }}
-        >
-          {images.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={product.Name || ""}
-              style={{
-                width: "150px",
-                height: "150px",
-                objectFit: "cover",
-                borderRadius: "8px",
-              }}
-            />
-          ))}
-        </div>
-      )}
-
-      {product.Brand && (
-        <p>
-          <strong>Бренд:</strong> {product.Brand}
-        </p>
-      )}
-
-      {typeList.length > 0 && (
-        <div>
-          <strong>Тип:</strong>
-          <ul style={{ margin: "0.25rem 0 0 1rem" }}>
-            {typeList.map((type, index) => (
-              <li key={index}>{type}</li>
+        {images.length > 0 && (
+          <div
+            style={{
+              display: "flex",
+              gap: "0.5rem",
+              flexWrap: "wrap",
+              margin: "1rem 0",
+            }}
+          >
+            {images.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={product.Name || ""}
+                style={{
+                  width: "150px",
+                  height: "150px",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                }}
+              />
             ))}
-          </ul>
-        </div>
-      )}
+          </div>
+        )}
 
-      {benefitsList.length > 0 && (
-        <div>
-          <strong>Переваги:</strong>
-          <ul style={{ margin: "0.25rem 0 0 1rem" }}>
-            {benefitsList.map((benefit, index) => (
-              <li key={index}>
-                <Link href={`/benefit/${encodeURIComponent(benefit)}`}>
-                  {benefit}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+        {product.Brand && (
+          <p>
+            <strong>Бренд:</strong> {product.Brand}
+          </p>
+        )}
 
-      {product.Cost && product.Cost.length > 0 && (
-        <div style={{ margin: "0.75rem 0" }}>
-          <strong>Ціна:</strong>
-          <ul style={{ margin: "0.25rem 0 0 1rem" }}>
-            {product.Cost.map((variant, index) =>
-              Object.entries(variant).map(([size, price]) => (
-                <li key={`${index}-${size}`}>
-                  {size} — {price}
+        {typeList.length > 0 && (
+          <div>
+            <strong>Тип:</strong>
+            <ul style={{ margin: "0.25rem 0 0 1rem" }}>
+              {typeList.map((type, index) => (
+                <li key={index}>{type}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {benefitsList.length > 0 && (
+          <div>
+            <strong>Переваги:</strong>
+            <ul style={{ margin: "0.25rem 0 0 1rem" }}>
+              {benefitsList.map((benefit, index) => (
+                <li key={index}>
+                  <Link href={`/benefit/${encodeURIComponent(benefit)}`}>
+                    {benefit}
+                  </Link>
                 </li>
-              )),
-            )}
-          </ul>
-        </div>
-      )}
+              ))}
+            </ul>
+          </div>
+        )}
 
-      <ProductActions docId={product.docId} />
+        {product.Cost && product.Cost.length > 0 && (
+          <div style={{ margin: "0.75rem 0" }}>
+            <strong>Ціна:</strong>
+            <ul style={{ margin: "0.25rem 0 0 1rem" }}>
+              {product.Cost.map((variant, index) =>
+                Object.entries(variant).map(([size, price]) => (
+                  <li key={`${index}-${size}`}>
+                    {size} — {price}
+                  </li>
+                )),
+              )}
+            </ul>
+          </div>
+        )}
 
-      <p>
-        <strong>Опис:</strong> {product.Describe}
-      </p>
-    </div>
+        <ProductActions docId={product.docId} />
+
+        <p>
+          <strong>Опис:</strong> {product.Describe}
+        </p>
+      </div>
+    </>
   );
 }

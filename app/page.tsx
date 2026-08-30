@@ -3,6 +3,7 @@ import { getAllProducts, getProductImages } from "@/lib/products";
 import { getBrandLogo } from "@/lib/brandLogos";
 import CardActions from "./components/CardActions";
 import { NavMenu } from "./components/NavMenu";
+import { Footer } from "./components/Footer";
 import { HeroSection } from "./components/HeroSection";
 import CategoryCircles from "./components/CategoryCircles";
 
@@ -136,6 +137,7 @@ export default async function Home() {
           })}
         </div>
       </section>
+      <Footer />
     </div>
   );
 }
