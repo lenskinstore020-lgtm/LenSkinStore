@@ -1,7 +1,7 @@
 export const HeroSection = () => {
   return (
     <div
-      className="hero min-h-[80vh]"
+      className="hero min-h-[90vh]"
       style={{
         backgroundImage:
           "url(https://res.cloudinary.com/z88a2was/image/upload/v1787991708/photo_2026-08-29_10-21-05.jpg)",

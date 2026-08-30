@@ -4,10 +4,21 @@ import { getBrandLogo } from "@/lib/brandLogos";
 import CardActions from "./components/CardActions";
 import { NavMenu } from "./components/NavMenu";
 import { HeroSection } from "./components/HeroSection";
-import { Footer } from "./components/Footer";
 import CategoryCircles from "./components/CategoryCircles";
 
 export const revalidate = 300; // кеш на 5 хвилин
+
+// Нормалізація: об'єднує схожі за змістом, але по-різному написані назви категорій
+const TYPE_ALIASES: Record<string, string> = {
+  "Eye creams": "Eye cream",
+  // за потреби додайте ще подібні дублікати сюди, наприклад:
+  // "Cleanser": "Cleansers",
+};
+
+function normalizeType(type: string): string {
+  const trimmed = type.trim();
+  return TYPE_ALIASES[trimmed] ?? trimmed;
+}
 
 export default async function Home() {
   const products = await getAllProducts();
@@ -24,8 +35,11 @@ export default async function Home() {
 
   const typesSet = new Set<string>();
   products.forEach((p) => {
-    if (Array.isArray(p.Type)) p.Type.forEach((t) => typesSet.add(t));
-    else if (typeof p.Type === "string") typesSet.add(p.Type);
+    if (Array.isArray(p.Type)) {
+      p.Type.forEach((t) => typesSet.add(normalizeType(t)));
+    } else if (typeof p.Type === "string") {
+      typesSet.add(normalizeType(p.Type));
+    }
   });
   const types = [...typesSet];
 
@@ -122,7 +136,6 @@ export default async function Home() {
           })}
         </div>
       </section>
-      <Footer />
     </div>
   );
 }
