@@ -49,7 +49,7 @@ export default async function TypePage({ params }: TypePageProps) {
       </h1>
 
       <div style={{ padding: "2rem" }}>
-        <Link className="text-[20px]" href="/">
+        <Link href="/" className="text-2xl m-2">
           ← Home
         </Link>
 

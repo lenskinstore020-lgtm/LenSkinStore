@@ -22,7 +22,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
         {brand}
       </h1>
       <div style={{ padding: "2rem" }}>
-        <Link href="/">← Home</Link>
+        <Link href="/" className="text-2xl m-2" />
 
         {products.length === 0 && (
           <p>There are currently no products from this brand.</p>

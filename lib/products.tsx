@@ -12,7 +12,7 @@ export interface Product {
   docId: string;
   Name?: string;
   Cost?: Record<string, string>[];
-  Describe?: string;
+  Description?: string;
   Brand?: string;
   Type?: string[] | string;
   images?: string[] | string;
