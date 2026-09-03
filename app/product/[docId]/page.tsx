@@ -52,75 +52,115 @@ export default async function ProductPage({ params }: ProductPageProps) {
   return (
     <>
       <NavMenu />
-      <h1 className="w-full p-2.5 bg-[#2C2C2C] text-center yesteryearFont text-[18px] sm:text-4xl md:text-7xl text-white">
-        {product.Name}
-      </h1>
-      <Link href="/" className="text-2xl m-2">
-        ←Home
-      </Link>
-      <div className="flex justify-center" style={{ margin: "10px 220px" }}>
-        <div className="my-4">
-          <ProductGallery images={images} alt={product.Name || ""} />
-        </div>
 
-        <div
-          className="p-2.5 text-left  text-[18px] sm:text-4xl md:text-[18px] "
-          style={{ padding: "2rem", width: "100%", margin: "0 auto" }}
+      <div className="px-4 sm:px-6 md:px-10 pt-4">
+        <Link
+          href="/"
+          className="inline-block text-base sm:text-lg text-black/70 hover:text-amber-400 transition-colors"
         >
-          <h1 className="p-2.5 text-left  text-[18px] sm:text-4xl md:text-[28px] ">
-            {product.Name}
-          </h1>
-          {product.Brand && (
-            <p>
-              <strong>Brand:</strong> {product.Brand}
-            </p>
-          )}
+          ← Home
+        </Link>
+      </div>
 
-          {typeList.length > 0 && (
-            <div>
-              <strong>Category:</strong>
-              <ul style={{ margin: "0.25rem 0 0 1rem" }}>
-                {typeList.map((type, index) => (
-                  <li key={index}>{type}</li>
-                ))}
-              </ul>
-            </div>
-          )}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-6 sm:py-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-start">
+          {/* Галерея */}
+          <div className="flex justify-center lg:justify-start">
+            <ProductGallery images={images} alt={product.Name || ""} />
+          </div>
 
-          {benefitsList.length > 0 && (
-            <div>
-              <strong>Benefits:</strong>
-              <ul style={{ margin: "0.25rem 0 0 1rem" }}>
-                {benefitsList.map((benefit, index) => (
-                  <li key={index}>
-                    <Link href={`/benefit/${encodeURIComponent(benefit)}`}>
+          {/* Інформація про товар */}
+          <div className="flex flex-col gap-4">
+            <h1 className="yesteryearFont text-2xl sm:text-3xl md:text-4xl text-black leading-tight">
+              {product.Name}
+            </h1>
+
+            {product.Brand && (
+              <div className="bg-[#222222] border border-[#333] rounded-lg px-4 py-3">
+                <span className="text-white/50 text-xs uppercase tracking-wide">
+                  Brand
+                </span>
+                <p className="text-white text-base sm:text-lg font-medium mt-1">
+                  {product.Brand}
+                </p>
+              </div>
+            )}
+
+            {typeList.length > 0 && (
+              <div className="bg-[#222222] border border-[#333] rounded-lg px-4 py-3">
+                <span className="text-white/50 text-xs uppercase tracking-wide">
+                  Category
+                </span>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {typeList.map((type, index) => (
+                    <span
+                      key={index}
+                      className="bg-[#333] text-white text-xs sm:text-sm px-3 py-1 rounded-full"
+                    >
+                      {type}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {benefitsList.length > 0 && (
+              <div className="bg-[#222222] border border-[#333] rounded-lg px-4 py-3">
+                <span className="text-white/50 text-xs uppercase tracking-wide">
+                  Benefits
+                </span>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {benefitsList.map((benefit, index) => (
+                    <Link
+                      key={index}
+                      href={`/benefit/${encodeURIComponent(benefit)}`}
+                      className="bg-[#333] text-white text-xs sm:text-sm px-3 py-1 rounded-full hover:bg-amber-400 hover:text-black transition-colors"
+                    >
                       {benefit}
                     </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+                  ))}
+                </div>
+              </div>
+            )}
 
-          {product.Cost && product.Cost.length > 0 && (
-            <div style={{ margin: "0.75rem 0" }}>
-              <strong>Cost:</strong>
-              <ul style={{ margin: "0.25rem 0 0 1rem" }}>
-                {product.Cost.map((variant, index) =>
-                  Object.entries(variant).map(([size, price]) => (
-                    <li key={`${index}-${size}`}>
-                      {size} — {price}
-                    </li>
-                  )),
-                )}
-              </ul>
-            </div>
-          )}
+            {product.Cost && product.Cost.length > 0 && (
+              <div className="bg-[#222222] border border-[#333] rounded-lg px-4 py-3">
+                <span className="text-white/50 text-xs uppercase tracking-wide">
+                  Price
+                </span>
+                <div className="flex flex-col gap-1 mt-2">
+                  {product.Cost.map((variant, index) =>
+                    Object.entries(variant).map(([size, price]) => (
+                      <div
+                        key={`${index}-${size}`}
+                        className="flex justify-between text-white text-sm sm:text-base"
+                      >
+                        <span className="text-white/70">{size}</span>
+                        <span className="text-[#F0BB78] font-semibold">
+                          {price}
+                        </span>
+                      </div>
+                    )),
+                  )}
+                </div>
+              </div>
+            )}
 
-          <ProductActions docId={product.docId} />
-
-          <p>{product.Description}</p>
+            <ProductActions docId={product.docId} />
+          </div>
         </div>
+      </div>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-6 sm:py-10">
+        {product.Description && (
+          <div className="bg-[#222222] border border-[#333] rounded-lg px-4 py-3">
+            <span className="text-white/50 text-xs uppercase tracking-wide">
+              Description
+            </span>
+            <p className="text-white/90 text-sm sm:text-base mt-2 leading-relaxed">
+              {product.Description}
+            </p>
+          </div>
+        )}
       </div>
       <Footer />
     </>
