@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 const INSTAGRAM_URL =
-  "https://www.instagram.com/len_skin_studio?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw=="; // замініть на реальний нік
-const WHATSAPP_URL = "https://wa.me/380000000000"; // той самий номер, що й у lib/whatsapp.ts
+  "https://www.instagram.com/len_skin_studio?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==";
+const WHATSAPP_URL = "https://wa.me/16478904645";
 
 export const Footer = () => {
   return (

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCart } from "@/lib/useCart";
 import { buildWhatsAppOrderLink } from "@/lib/whatsapp";
 import type { Product } from "@/lib/products";
+import { FadeIn } from "./FadeIn";
 import { NavMenu } from "./NavMenu";
 import { Footer } from "./Footer";
 
@@ -25,88 +26,86 @@ export default function CartList({ products }: { products: Product[] }) {
   return (
     <>
       <NavMenu />
+      <h1 className="w-full p-2.5 bg-[#2C2C2C] text-center yesteryearFont text-[18px] sm:text-4xl md:text-7xl text-white">
+        Cart ({cart.totalCount})
+      </h1>
+
       <div style={{ padding: "2rem" }}>
-        <Link href="/">← На головну</Link>
-        <h1>Кошик ({cart.totalCount})</h1>
+        <Link href="/" className="text-2xl m-2">
+          ← Home
+        </Link>
+        <FadeIn delay={150}>
+          {cartProducts.length === 0 && (
+            <p className="text-white/70 text-center mt-10">
+              Your cart is empty.
+            </p>
+          )}
 
-        {cartProducts.length === 0 && <p>Кошик порожній.</p>}
+          <div className="max-w-3xl mx-auto flex flex-col gap-4 px-4 sm:px-6 py-8">
+            {cartProducts.map((item) => (
+              <div
+                key={item.docId}
+                className="bg-[#222222] border border-[#333] rounded-lg p-3 sm:p-4 flex items-center gap-4"
+              >
+                <Link
+                  href={`/product/${item.docId}`}
+                  className="flex-1 min-w-0"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <h3 className="text-white text-sm sm:text-base font-medium truncate">
+                    {item.Name}
+                  </h3>
+                  {item.Cost && item.Cost[0] && (
+                    <p className="text-[#F0BB78] text-sm mt-1">
+                      {Object.entries(item.Cost[0])[0].join(" — ")}
+                    </p>
+                  )}
+                </Link>
 
-        {cartProducts.map((item) => (
-          <div
-            key={item.docId}
-            style={{
-              border: "1px solid #ccc",
-              borderRadius: "8px",
-              padding: "1rem",
-              marginBottom: "1rem",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <div>
-              <Link
-                href={`/product/${item.docId}`}
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <h3>{item.Name}</h3>
-              </Link>
-              {item.Cost && item.Cost[0] && (
-                <p>{Object.entries(item.Cost[0])[0].join(" — ")}</p>
-              )}
-            </div>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <button
+                    onClick={() =>
+                      cart.updateQuantity(item.docId, item.quantity - 1)
+                    }
+                    className="w-7 h-7 flex items-center justify-center rounded-full border border-[#444] text-white hover:bg-[#333] transition-colors"
+                  >
+                    −
+                  </button>
+                  <span className="text-white text-sm w-5 text-center">
+                    {item.quantity}
+                  </span>
+                  <button
+                    onClick={() =>
+                      cart.updateQuantity(item.docId, item.quantity + 1)
+                    }
+                    className="w-7 h-7 flex items-center justify-center rounded-full border border-[#444] text-white hover:bg-[#333] transition-colors"
+                  >
+                    +
+                  </button>
+                  <button
+                    onClick={() => cart.removeFromCart(item.docId)}
+                    className="ml-2 text-white/50 hover:text-red-400 text-xs sm:text-sm transition-colors"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))}
 
-            <div
-              style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-            >
-              <button
-                onClick={() =>
-                  cart.updateQuantity(item.docId, item.quantity - 1)
-                }
+            {whatsappLink && (
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 mt-4 py-3 px-6 rounded-lg text-white font-semibold text-sm sm:text-base bg-[#25D366] hover:bg-[#1ebe5b] transition-colors"
               >
-                −
-              </button>
-              <span>{item.quantity}</span>
-              <button
-                onClick={() =>
-                  cart.updateQuantity(item.docId, item.quantity + 1)
-                }
-              >
-                +
-              </button>
-              <button
-                onClick={() => cart.removeFromCart(item.docId)}
-                style={{ marginLeft: "1rem" }}
-              >
-                Видалити
-              </button>
-            </div>
+                📱 Order via WhatsApp
+              </a>
+            )}
           </div>
-        ))}
-
-        {whatsappLink && (
-          <a
-            href={whatsappLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              marginTop: "1.5rem",
-              padding: "0.9rem 1.6rem",
-              background: "#25D366",
-              color: "white",
-              borderRadius: "8px",
-              textDecoration: "none",
-              fontWeight: "bold",
-              fontSize: "1rem",
-            }}
-          >
-            📱 Оформити замовлення через WhatsApp
-          </a>
-        )}
+        </FadeIn>
       </div>
+
       <Footer />
     </>
   );

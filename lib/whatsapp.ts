@@ -2,7 +2,7 @@ import type { Product } from "./products";
 
 // ВАЖЛИВО: замініть на свій реальний номер WhatsApp у міжнародному форматі,
 // без "+", пробілів і дужок. Наприклад для України: 380991234567
-const WHATSAPP_PHONE = "48575233009";
+const WHATSAPP_PHONE = "16478904645";
 
 export interface CartItemWithProduct extends Product {
   quantity: number;
@@ -18,11 +18,11 @@ export function buildWhatsAppOrderLink(items: CartItemWithProduct[]): string {
   });
 
   const message = [
-    "Вітаю! Хочу оформити замовлення:",
+    "Hi! I would like to place a order  ",
     "",
     ...lines,
     "",
-    "Будь ласка, підтвердіть наявність і деталі оплати.",
+    "Please confirm the payment details",
   ].join("\n");
 
   const encodedMessage = encodeURIComponent(message);

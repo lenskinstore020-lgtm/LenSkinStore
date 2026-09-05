@@ -14,9 +14,16 @@ export interface Product {
   Cost?: Record<string, string>[];
   Description?: string;
   Brand?: string;
+  BestSale?: boolean;
   Type?: string[] | string;
   images?: string[] | string;
   Benefits?: string[] | string;
+  skinType?: string;
+  QUICKTIP?: string;
+  Warning?: string;
+  ProTip?: string;
+  Steps?: string[];
+  SetIncludes?: string[];
   id?: string;
 }
 
@@ -32,6 +39,14 @@ export async function getProductsByType(type: string): Promise<Product[]> {
     collection(db, "Cosmetic"),
     where("Type", "array-contains", type),
   );
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map(
+    (doc) => ({ docId: doc.id, ...doc.data() }) as Product,
+  );
+}
+
+export async function getBestSaleProducts(): Promise<Product[]> {
+  const q = query(collection(db, "Cosmetic"), where("BestSale", "==", true));
   const snapshot = await getDocs(q);
   return snapshot.docs.map(
     (doc) => ({ docId: doc.id, ...doc.data() }) as Product,

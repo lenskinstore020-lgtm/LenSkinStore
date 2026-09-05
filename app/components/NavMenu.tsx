@@ -70,30 +70,21 @@ export const NavMenu = () => {
                   </Link>
                 </label>
               </li>
+
               <li>
                 <label htmlFor="my-drawer-1">
                   <Link
-                    href="/favorites"
+                    href="/about-us"
                     className="hover:text-amber-400 transition-colors duration-200"
                   >
-                    Customer
+                    About Us
                   </Link>
                 </label>
               </li>
               <li>
                 <label htmlFor="my-drawer-1">
                   <Link
-                    href="/sale"
-                    className="hover:text-amber-400 transition-colors duration-200"
-                  >
-                    Sale
-                  </Link>
-                </label>
-              </li>
-              <li>
-                <label htmlFor="my-drawer-1">
-                  <Link
-                    href="/sale"
+                    href="/best-sale"
                     className="hover:text-amber-400 transition-colors duration-200"
                   >
                     Best Seller
